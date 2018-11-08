@@ -1,5 +1,4 @@
 var generatedPolynomial = 0b1011;
-var a = 0b1100001;
 
 function getCodding(s) {
     var a = s.charCodeAt(0);
@@ -9,6 +8,13 @@ function getCodding(s) {
 $("#my-input").keyup(function () {
     table = $("#resultTable");
     table.empty();
+    table.append("<thead class=\"thead-dark\">\n" +
+        "            <th>Символ</th>\n" +
+        "            <th>Код</th>\n" +
+        "            <th>CRC</th>\n" +
+        "            <th>Код + CRC</th>\n" +
+        "            </thead>")
+
     var text = $("#my-input").val();
     if (text.length == 0) {
         return;
@@ -52,16 +58,20 @@ function dividePolynomial(polynomial, generatedPolynomial) {
 
 function fillTable(table, symbol, crc) {
     var tr = "<tr>";
+    var symbolTemp = symbol.charCodeAt(0).toString(2);
+    while (symbolTemp.length < 7) {
+        symbolTemp = "0" + symbolTemp;
+    }
     tr += "<td>" + symbol + "</td>";
-    tr += "<td>" + symbol.charCodeAt(0).toString(2) + "</td>";
+    tr += "<td>" + symbolTemp + "</td>";
     tr += "<td>" + crc.toString(2) + "</td>";
 
     crc = crc.toString(2);
-    while (crc.length< generatedPolynomial.toString(2).length) {
+    while (crc.length < generatedPolynomial.toString(2).length) {
         crc = "0" + crc;
     }
 
-    tr += "<td>" + symbol.charCodeAt(0).toString(2) + crc + "</td>";
+    tr += "<td>" + symbolTemp + crc + "</td>";
     tr += "</tr>";
     table.append(tr);
 }

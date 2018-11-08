@@ -1,3 +1,15 @@
 input-min-height {
     min-height: 100px;
 }
+
+table td th {
+    text-align: center;
+}
+
+#resultTable td {
+    text-align: center;
+}
+
+#resultTable th {
+    text-align: center;
+}
